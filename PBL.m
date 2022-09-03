@@ -1,3 +1,14 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Disciplina: MI-Processamento Digital de Sinais
+% Instituição: Uefs
+% Período: 2022.2
+% Projeto: Amostragem Natural (Gatilhamento)
+% Discentes: 
+%         - Gabriel Sá Barreto Alves
+%         - Marcelo Mota
+%         - Alyson Felipe Oliveira Dantas
+%         - Lucas da Silva Cardoso
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 close all; clear ;
 %% DEFINIÇÃO DE PARÂMETROS
 amp      = 1;                 % Amplitude do Sinal;
@@ -5,7 +16,7 @@ freq     =1000;              % Frequência do Sinal = 1kHz;
 T        = 1/freq;             % Período do Sinal;
 fs       = 300000;           % Frequência de Amostragem para geração do sinal = 3000kHz = 3 MHz (amostras por segundo);
 ts       = 1/fs;              % Período de Amostragem (um período para cada amostra);
-stoptime = (10*T) - ts;        % Duração do Sinal em segundos (5 períodos);
+stoptime = (5*T) - ts;        % Duração do Sinal em segundos (5 períodos);
 t        = 0:ts:stoptime;     % Vetor de tempo;
 % Geração de um sinal senoidal;
 xt       = amp*sin(2*pi*freq*t);
@@ -107,4 +118,4 @@ hold on
 stem(vf_a,fase_amostragem/pi,'.b')
 stem(vf,fase_original/pi,'.r')
 legend('Fase original','Fase amostragem');
-axis([-2000 2000 -1 1]);
+axis([-3000 3000 -1 1]);
