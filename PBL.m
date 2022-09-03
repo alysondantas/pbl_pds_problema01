@@ -5,7 +5,7 @@ freq     =1000;              % Frequência do Sinal = 1kHz;
 T        = 1/freq;             % Período do Sinal;
 fs       = 300000;           % Frequência de Amostragem para geração do sinal = 3000kHz = 3 MHz (amostras por segundo);
 ts       = 1/fs;              % Período de Amostragem (um período para cada amostra);
-stoptime = (20*T) - ts;        % Duração do Sinal em segundos (5 períodos);
+stoptime = (10*T) - ts;        % Duração do Sinal em segundos (5 períodos);
 t        = 0:ts:stoptime;     % Vetor de tempo;
 % Geração de um sinal senoidal;
 xt       = amp*sin(2*pi*freq*t);
@@ -98,21 +98,13 @@ fase_original = angle(Yw);
 X_a_w = fft(amostragem);
 Y_a_w = fftshift(X_a_w);
 size_x_a = length(X_a_w);
-vf_a = (-size_x_a/2:size_x_a/2-1)/size_x_a*fs;
+vf_a = (-size_x_a/2:size_x_a/2-1)/size_x_a.*fs;
 Y_a_w(abs(Y_a_w) < tol) = 0;
 fase_amostragem = angle(Y_a_w);
 %% PLOT DA FASE SINAL ORIGINAL
-%Xw_fase = angle(Y);
 figure(2)
 hold on
-stem(vf,fase_original/pi,'.r')
 stem(vf_a,fase_amostragem/pi,'.b')
-
+stem(vf,fase_original/pi,'.r')
+legend('Fase original','Fase amostragem');
 axis([-2000 2000 -1 1]);
-%figure(2)
-%stem(f,Xw_fase,'.');
-%axis([-6000 6000 0 max(Xw_fase)*1.1]);
-%grid on;
-%xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
-%ylabel ("Ângulo", 'fontsize', 12);
-%title ("FASE SINAL ORIGINAL", 'fontsize', 12);
