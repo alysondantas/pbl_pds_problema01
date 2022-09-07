@@ -1,7 +1,7 @@
 clear all; close all; clc
 %% dados do sinal
 f = 1000;%Freq entrada Hz
-fs =1000;% Frequencia de amostragem Hz
+fs =500;% Frequencia de amostragem Hz
 %% gerar sinal
 tempo = [0:1/(100*f):10/f];%Tempo amostral
 sinal = sin(2*pi*f*tempo); % Geração onda senoidal
