@@ -18,9 +18,5 @@ length(X);
 omega = 0:fs/length(y):fs-(fs/length(y));
 waux  = -fliplr(omega(1,2:end));
 f     = [waux omega];
-Y     = abs(2*X/length(t));
-%plot(w,abs(2*X/length(t))); grid on;
-%xlabel('$f$(Hz)','interpreter','latex');
-%ylabel('Magnitude');
-%title('Espectro $|X_{c}(j2\pi f)|$','interpreter','latex');
+Y     = abs(1*X/length(t));
 return

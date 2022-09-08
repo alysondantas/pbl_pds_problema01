@@ -53,8 +53,8 @@ title ("Sinal de Entrada no Domínio do Tempo", 'fontsize', 14);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GERAÇÃO DO TREM DE PULSOS
 amp  = 1;
-duty = 1; 
-freq = 1900;
+duty = 1; %Lembrar de explicar o que acontece com a sync. 
+freq = 2000;
 pwm_signal = pulses_generator(t,freq,amp,duty);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO TREM DE PULSOS
@@ -68,7 +68,7 @@ title ("Trem de Pulsos", 'fontsize', 14);
 % MODULAÇÃO DO SINAL DE ENTRADA
 xs = xt.*pwm_signal;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CÁLTUCO DAS FFTS
+% CÁLCULO DAS FFTS
 [f_Xt,Xt] = my_fft2(t,xt,fs);
 [f_PWM,PWM] = my_fft2(t,pwm_signal,fs);
 [f_Xs,Xs] = my_fft2(t,xs,fs);
@@ -97,7 +97,7 @@ title ("Sobreposição entre o sinal original e modulado", 'fontsize', 14);
 % PLOT ENTRADA
 figure;
 subplot(2,2,1)
-stem(f_Xt,Xt,'.');
+plot(f_Xt,Xt);
 axis([-3000 3000 0 max(Xt)*1.1]);
 grid on;
 xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
@@ -106,8 +106,8 @@ title ("Espectro do Sinal da Entrada", 'fontsize', 12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT PWM
 subplot(2,2,3)
-stem(f_PWM,PWM,'.');
-axis([-3000 3000 0 max(PWM)*1.1]);
+plot(f_PWM,PWM);
+%axis([-3000 3000 0 max(PWM)*1.1]);
 grid on;
 xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
 ylabel ('|X({\itf})|', 'fontsize', 12);
@@ -117,7 +117,7 @@ title ("Espectro do Trem de Pulsos", 'fontsize', 12);
 subplot(2,2,[2,4])
 stem(f_Xt,Xt,'.');
 hold on
-stem(f_Xs,Xs,'.');
+plot(f_Xs,Xs);
 axis([-3000 3000 0 max(Xs)*1.1]);
 xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
 ylabel ('|X({\itf})|', 'fontsize', 12);
@@ -132,7 +132,7 @@ legend ('Entrada', 'Saida');
 % PLOT ENTRADA
 figure;
 subplot(2,2,1)
-stem(fr,ph);
+plot(fr,ph);
 axis([-1200 1200 -2 2]);
 xlabel 'Frequency (Hz)';
 ylabel 'Phase / \pi';
@@ -140,7 +140,7 @@ title ("Fase do sinal de Entrada", 'fontsize', 12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT PWM
 subplot(2,2,3)
-stem(fr_Xs,ph_Xs);
+plot(fr_Xs,ph_Xs);
 axis([-1200 1200 -2 2]);
 xlabel 'Frequency (Hz)';
 ylabel 'Phase / \pi';
@@ -148,10 +148,10 @@ title ("Fase do sinal de Saída", 'fontsize', 12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT SOBREPOSIÇÃO DE ESPECTROS
 subplot(2,2,[2,4])
-stem(fr,ph,'.');
+plot(fr,ph);
 hold on
-stem(fr_Xs,ph_Xs,'.');
-axis([-1200 1200 -2 2]);
+plot(fr_Xs,ph_Xs);
+axis([-2400 2400 -2 2]);
 xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
 ylabel ('|X({\itf})|', 'fontsize', 12);
 title ("Sobreposição das fases", 'fontsize', 12);
