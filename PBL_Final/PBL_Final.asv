@@ -11,24 +11,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CASOS DE ANALISE:
 % Fn = 1000;
-% Caso 01 - Fs = 500 MARCA PARADA NO MESMO LUGAR PISCANDO LENTAMENTE(APARECE A CADA 2 CICLOS
+% Caso 01 - Fs = 500 MARCA PARADA NO MESMO LUGAR PISCANDO LENTAMENTE
+% (APARECE A CADA 2 CICLOS
 % Caso 02 - Fs = 700 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO
-% Caso 03 - Fs = 900 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO - MAIS RAPIDO QUE O ANTERIOR
+% Caso 03 - Fs = 900 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO - MAIS
+% RAPIDO QUE O ANTERIOR
 % Caso 04 - Fs = 1000 MARCA PARADA NO MESMO LOCAL
 % Caso 05 - Fs = 1100 MARCA ANDANDO LENTAMENTE NO SENTIDO ANTI-HORÁRIO
 % Caso 06 - Fs = 1300 MARCA ALTERNADA 2-1-1 REPETE
 % Caso 07 - Fs = 1500 3 MARCAS PARADAS
 % Caso 08 - Fs = 1700 2 MARCAS ANDANDO EM SENTIDO HORÁRIO
-% Caso 09 - Fs = 1900 2 MARCAS ANDANDO EM SENTIDO HORÁRIO - VELOCIDADE MENOR QUE 1700
+% Caso 09 - Fs = 1900 2 MARCAS ANDANDO EM SENTIDO HORÁRIO - VELOCIDADE
+% MENOR QUE 1700
 % Caso 10 - Fs = 2000 2 MARCAS PARADAS
 % Caso 11 - Fs = 2100 2 MARCAS ANDANDO EM SENTIDO HORÁRIO
-% Caso 12 - Fs = 2300 1 MARCA ANDANDO EM SENTIDO HORÁRIO
-% Caso 13 - Fs = 2500 1 MARCA ANDANDO EM SENTIDO HORÁRIO MAIS RÁPIDO QUE 2300
-% Caso 14 - Fs = 3000 1 MARCA APARECENDO n VEZES A FREQENCIA SEMPRE NOS MESMO PONTOS, NESSE CASO n=3
-% Caso 15 - Fs = 4000 1 MARCA APARECENDO n VEZES A FREQENCIA SEMPRE NOS  MESMO PONTOS, NESSE CASO n=4
-% Caso 16 - Fs = 5000 1 MARCA APARECENDO n VEZES A FREQENCIA SEMPRE NOS MESMO PONTOS, NESSE CASO n=5 
+% Caso 12 - Fs = 2300 
+% Caso 13 - Fs = 2500
+% Caso 14 - Fs = 3000
+% Caso 15 - Fs = 4000
+% Caso 16 - Fs = 5000
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 close all; clear all; clc; %pkg load signal;
+freq_tp = 4000;
 % Geração de um sinal contínuo no tempo e limitado em frequência;
 % Definições no tempo para geração e amostragem do sinal de entrada:
 amp      = 1;                 % Amplitude do Sinal;
@@ -55,7 +59,7 @@ title ("Sinal de Entrada no Domínio do Tempo", 'fontsize', 14);
 % GERAÇÃO DO TREM DE PULSOS
 amp  = 1;
 duty = 1; %Lembrar de explicar o que acontece com a sync. 
-freq_tp = 1900;
+
 pwm_signal = pulses_generator(t,freq_tp,amp,duty);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO TREM DE PULSOS
@@ -103,6 +107,7 @@ plot(t,xt, '-.', 'LineWidth',1);
 hold on
 plot(x_v,y_v, 'o', 'LineWidth',1);
 grid on;
+axis([
 xlabel('$t$','Interpreter','LaTex','FontSize',18)
 ylabel('$x[nT_s],x(t)$','Interpreter','LaTex','FontSize',18)
 title ("Visualização do Efeito", 'fontsize', 14);
