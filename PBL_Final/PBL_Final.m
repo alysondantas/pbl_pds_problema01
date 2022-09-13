@@ -43,7 +43,7 @@ xt       = amp*sin(2*pi*freq*t);
 N        = length(xt);    % Quantidade de amostras do sinal;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO SINAL ORIGINAL
-figure;
+p1 = figure;
 subplot(2,1,1);
 plot(t,xt, 'LineWidth',2);
 grid on;
@@ -55,7 +55,7 @@ title ("Sinal de Entrada no Domínio do Tempo", 'fontsize', 14);
 % GERAÇÃO DO TREM DE PULSOS
 amp  = 1;
 duty = 1; %Lembrar de explicar o que acontece com a sync. 
-freq_tp = 1900;
+freq_tp = 500;
 pwm_signal = pulses_generator(t,freq_tp,amp,duty);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO TREM DE PULSOS
@@ -66,6 +66,10 @@ axis([0 stoptime 0 max(xt)*1.1]);
 xlabel ('Tempo (s)' , 'fontsize', 14);
 ylabel ("Amplitude", 'fontsize', 14);
 title ("Trem de Pulsos", 'fontsize', 14);
+freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F1.pdf']);
+exportgraphics(p1,freq_tp_str);
+freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F1.eps']);
+exportgraphics(p1,freq_tp_str);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MODULAÇÃO DO SINAL DE ENTRADA
 xs = xt.*pwm_signal;
@@ -77,7 +81,7 @@ xs = xt.*pwm_signal;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DA MODULAÇÃO E DA INTERSSEÇÃO DOS SINAIS ORIGINAIS E MODULADOS
 % PLOT DA MODULAÇÃO
-figure;
+p2 = figure;
 subplot(3,1,1)
 plot(t,xs, 'LineWidth',2);
 grid on;
@@ -106,10 +110,14 @@ grid on;
 xlabel('$t$','Interpreter','LaTex','FontSize',18)
 ylabel('$x[nT_s],x(t)$','Interpreter','LaTex','FontSize',18)
 title ("Visualização do Efeito", 'fontsize', 14);
+freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F2.pdf']);
+exportgraphics(p2,freq_tp_str);
+freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F2.eps']);
+exportgraphics(p2,freq_tp_str);
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO ESPECTRO DA ENTRADA, TREM DE PULSOS E SOBREPOSIÇÃO DE ESPECTROS
 % PLOT ENTRADA
-figure;
+p3 = figure;
 subplot(2,2,1)
 plot(f_Xt,Xt);
 axis([-3000 3000 0 max(Xt)*1.1]);
@@ -137,3 +145,7 @@ xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
 ylabel ('|X({\itf})|', 'fontsize', 12);
 title ("Sobreposição de espectros", 'fontsize', 12);
 legend ('Entrada', 'Saida');
+freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F3.pdf']);
+exportgraphics(p3,freq_tp_str);
+freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F3.eps']);
+exportgraphics(p3,freq_tp_str);
