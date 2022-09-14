@@ -10,7 +10,7 @@
 %         - Lucas Cardoso
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CASOS DE ANALISE:
-% Fn = 1000;
+% Fn = 1200;
 % Caso 01 - Fs = 500 MARCA PARADA NO MESMO LUGAR PISCANDO LENTAMENTE(APARECE A CADA 2 CICLOS
 % Caso 02 - Fs = 700 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO
 % Caso 03 - Fs = 900 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO - MAIS RAPIDO QUE O ANTERIOR
@@ -48,14 +48,14 @@ subplot(2,1,1);
 plot(t,xt, 'LineWidth',2);
 grid on;
 axis([0 stoptime min(xt)*1.1 max(xt)*1.1]);
-xlabel ('Tempo (s)' , 'fontsize', 14);
-ylabel ("Amplitude", 'fontsize', 14);
-title ("Sinal de Entrada no Domínio do Tempo", 'fontsize', 14);
+xlabel ('Tempo (s)' , 'Interpreter','LaTex','FontSize',12);
+ylabel ("Amplitude", 'Interpreter','LaTex','FontSize',12);
+title (" Sinal de Entrada no Dom\'{i}nio do Tempo", 'Interpreter', 'LaTex','FontSize',12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GERAÇÃO DO TREM DE PULSOS
 amp  = 1;
-duty = 1; %Lembrar de explicar o que acontece com a sync. 
-freq_tp = 500;
+duty = 15; %Lembrar de explicar o que acontece com a sync. 
+freq_tp = 2900;
 pwm_signal = pulses_generator(t,freq_tp,amp,duty);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO TREM DE PULSOS
@@ -63,9 +63,9 @@ subplot(2,1,2);
 plot(t,pwm_signal, 'LineWidth',2);
 grid on;
 axis([0 stoptime 0 max(xt)*1.1]);
-xlabel ('Tempo (s)' , 'fontsize', 14);
-ylabel ("Amplitude", 'fontsize', 14);
-title ("Trem de Pulsos", 'fontsize', 14);
+xlabel ('Tempo (s)' , 'Interpreter','LaTex','FontSize',12);
+ylabel ("Amplitude", 'Interpreter','LaTex','FontSize',12);
+title (" Trem de Pulsos", 'Interpreter','LaTex','FontSize',12);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F1.pdf']);
 exportgraphics(p1,freq_tp_str);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F1.eps']);
@@ -85,9 +85,9 @@ p2 = figure;
 subplot(3,1,1)
 plot(t,xs, 'LineWidth',2);
 grid on;
-xlabel ('Tempo (s)' , 'fontsize', 14);
-ylabel ("Amplitude", 'fontsize', 14);
-title ("Sinal Modulado com PAM", 'fontsize', 14);
+xlabel ('Tempo (s)' , 'Interpreter','LaTex','FontSize',12);
+ylabel ("Amplitude", 'Interpreter','LaTex','FontSize',12);
+title (" Sinal Modulado com PAM", 'Interpreter','LaTex','FontSize',12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DA SOBREPOSIÇÃO DO SINAL ORIGINAL E MODULADO
 subplot(3,1,2)
@@ -95,9 +95,9 @@ plot(t,xt, '-.', 'LineWidth',1);
 hold on
 plot(t,xs, '-', 'LineWidth',1);
 grid on;
-xlabel ('Tempo (s)' , 'fontsize', 14);
-ylabel ("Amplitude", 'fontsize', 14);
-title ("Sobreposição entre o sinal original e modulado", 'fontsize', 14);
+xlabel ('Tempo (s)' , 'Interpreter','LaTex','FontSize',12);
+ylabel ("Amplitude", 'Interpreter','LaTex','FontSize',12);
+title (" Sobreposi\c{c}\~{a}o entre o sinal original e modulado", 'Interpreter','LaTex','FontSize',12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO VENTILADOR
 [x_v, y_v] = ventilador (freq, freq_tp, stoptime);
@@ -107,9 +107,9 @@ plot(t,xt, '-.', 'LineWidth',1);
 hold on
 plot(x_v,y_v, 'o', 'LineWidth',1);
 grid on;
-xlabel('$t$','Interpreter','LaTex','FontSize',18)
-ylabel('$x[nT_s],x(t)$','Interpreter','LaTex','FontSize',18)
-title ("Visualização do Efeito", 'fontsize', 14);
+xlabel('$t$','Interpreter','LaTex','FontSize',12)
+ylabel('$x[nT_s],x(t)$','Interpreter','LaTex','FontSize',12)
+title (" Visualiza\c{c}\~{a}o do Efeito", 'Interpreter','LaTex','FontSize',12);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F2.pdf']);
 exportgraphics(p2,freq_tp_str);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F2.eps']);
@@ -118,34 +118,37 @@ exportgraphics(p2,freq_tp_str);
 % PLOT DO ESPECTRO DA ENTRADA, TREM DE PULSOS E SOBREPOSIÇÃO DE ESPECTROS
 % PLOT ENTRADA
 p3 = figure;
-subplot(2,2,1)
+subplot(2,4,[1,2])
 plot(f_Xt,Xt);
 axis([-3000 3000 0 max(Xt)*1.1]);
 grid on;
-xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
-ylabel ('|X({\itf})|', 'fontsize', 12);
-title ("Espectro do Sinal da Entrada", 'fontsize', 12);
+xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
+title (" Espectro do Sinal da Entrada", 'Interpreter','LaTex','FontSize',12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT PWM
-subplot(2,2,3)
+subplot(2,4,[5,6])
 plot(f_PWM,PWM);
-%axis([-3000 3000 0 max(PWM)*1.1]);
+axis([-3000 3000 0 max(PWM)*1.1]);
 grid on;
-xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
-ylabel ('|X({\itf})|', 'fontsize', 12);
-title ("Espectro do Trem de Pulsos", 'fontsize', 12);
+xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
+title (" Espectro do  Trem de Pulsos", 'Interpreter','LaTex','FontSize',12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT SOBREPOSIÇÃO DE ESPECTROS
-subplot(2,2,[2,4])
+l = subplot(2,4,[3,4,7,8]);
 stem(f_Xt,Xt,'.');
 hold on
 plot(f_Xs,Xs);
 axis([-3000 3000 0 max(Xs)*1.1]);
-xlabel ('{\it f} (Hertz)' , 'fontsize', 12);
-ylabel ('|X({\itf})|', 'fontsize', 12);
-title ("Sobreposição de espectros", 'fontsize', 12);
+xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+colororder(l,{'k'})
+yyaxis right
+ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12, 'Color', 'black');
+title (" Sobreposi\c{c}\~{a}o de espectros", 'Interpreter','LaTex','FontSize',12);
 legend ('Entrada', 'Saida');
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F3.pdf']);
 exportgraphics(p3,freq_tp_str);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F3.eps']);
 exportgraphics(p3,freq_tp_str);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
