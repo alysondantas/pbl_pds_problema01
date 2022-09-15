@@ -91,7 +91,7 @@ grid on;
 xlabel('$t$','Interpreter','LaTex','FontSize',12)
 ylabel('$x[nT_s],x(t)$','Interpreter','LaTex','FontSize',12)
 title (" Visualiza\c{c}\~{a}o do Efeito", 'Interpreter','LaTex','FontSize',12);
-% EXPORT AUTOMÁTICO DAS FIGURAS
+
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F2.pdf']);
 exportgraphics(p2,freq_tp_str);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F2.eps']);
@@ -112,43 +112,43 @@ grid on;
 xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
 ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
 title (" Espectro do  Trem de Pulsos", 'Interpreter','LaTex','FontSize',12);
-% EXPORT AUTOMÁTICO DAS FIGURAS
 freq_tp_str = join(['PRINTS\\sinc.pdf']);
 exportgraphics(p4,freq_tp_str);
 freq_tp_str = join(['PRINTS\\sinc.eps']);
 exportgraphics(p4,freq_tp_str);
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO ESPECTRO DA ENTRADA, TREM DE PULSOS E SOBREPOSIÇÃO DE ESPECTROS
-% PLOT DO ESPECTRO DA ENTRADA
+% PLOT ENTRADA
 p3 = figure;
-subplot(2,4,[1,2])
-plot(f_Xt,Xt);
-axis([-3000 3000 0 max(Xt)*1.1]);
-grid on;
-xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
-ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
-title (" Espectro do Sinal da Entrada", 'Interpreter','LaTex','FontSize',12);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PLOT DO EXPECTRO DO PWM
-subplot(2,4,[5,6])
-plot(f_PWM,PWM);
-axis([-3000 3000 0 max(PWM)*1.1]);
-grid on;
-xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
-ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
-title (" Espectro do  Trem de Pulsos", 'Interpreter','LaTex','FontSize',12);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% subplot(2,4,[1,2])
+% plot(f_Xt,Xt);
+% axis([-3000 3000 0 max(Xt)*1.1]);
+% grid on;
+% xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+% ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
+% title (" Espectro do Sinal da Entrada", 'Interpreter','LaTex','FontSize',12);
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % PLOT PWM
+% subplot(2,4,[5,6])
+% plot(f_PWM,PWM);
+% axis([-3000 3000 0 max(PWM)*1.1]);
+% grid on;
+% xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+% ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
+% title (" Espectro do  Trem de Pulsos", 'Interpreter','LaTex','FontSize',12);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT SOBREPOSIÇÃO DE ESPECTROS
-l = subplot(2,4,[3,4,7,8]);
+% l = subplot(2,4,[3,4,7,8]);
 stem(f_Xt,Xt,'.');
 hold on
 plot(f_Xs,Xs);
 axis([-4500 4500 0 max(Xs)*1.1]);
 xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+% colororder(p3,{'k'})
+% yyaxis right
 ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12, 'Color', 'black');
 title (" Sobreposi\c{c}\~{a}o de espectros", 'Interpreter','LaTex','FontSize',12);
 legend ('Entrada', 'Saida');
-% EXPORT AUTOMÁTICO DAS FIGURAS
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F3.pdf']);
 exportgraphics(p3,freq_tp_str);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F3.eps']);
