@@ -2,12 +2,12 @@
 % Disciplina: MI-Processamento Digital de Sinais
 % Instituição: Uefs
 % Período: 2022.2
-% Projeto: Amostragem Natural (Gatilhamento)
+% Projeto: Entendendo o Efeito Estroboscópico - Subamostragem e Aliasing
 % Discentes: 
-%         - Gabriel Sá 
-%         - Marcelo Mota
-%         - Alyson Dantas
+%         - Alyson Dantas 
+%         - Gabriel Sá
 %         - Lucas Cardoso
+%         - Marcelo Mota
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 close all; clear all; clc; %pkg load signal;
 % Geração de um sinal contínuo no tempo e limitado em frequência;
@@ -17,7 +17,7 @@ freq     = 1000;                        % Frequência do Sinal = 1kHz;
 T        = 1/freq;                      % Período do Sinal;
 fs       = 3000000;                     % Frequência de Amostragem para geração do sinal = 3000kHz = 3 MHz (amostras por segundo);
 ts       = 1/fs;                        % Período de Amostragem (um período para cada amostra);
-stoptime = (20*T) - ts;                 % Duração do Sinal em segundos (5 períodos);
+stoptime = (20*T) - ts;                 % Duração do Sinal em segundos (20 períodos);
 t        = 0:ts:stoptime;               % Vetor de tempo;
 xt       = amp*sin(2*pi*freq*t);        % Geração de um sinal senoidal;
 N        = length(xt);                  % Quantidade de amostras do sinal;
