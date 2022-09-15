@@ -11,24 +11,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CASOS DE ANALISE:
 % Fn = 1200;
-% Caso 01 - Fs = 500 MARCA PARADA NO MESMO LUGAR PISCANDO LENTAMENTE(APARECE A CADA 2 CICLOS
+% Caso 01 - Fs = 500 MARCA PARADA NO MESMO LUGAR PISCANDO
+% LENTAMENTE(APARECE A CADA 2 CICLOS ESSE
 % Caso 02 - Fs = 700 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO
-% Caso 03 - Fs = 900 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO - MAIS RAPIDO QUE O ANTERIOR
-% Caso 04 - Fs = 1000 MARCA PARADA NO MESMO LOCAL
-% Caso 05 - Fs = 1100 MARCA ANDANDO LENTAMENTE NO SENTIDO ANTI-HORÁRIO
-% Caso 06 - Fs = 1300 MARCA ALTERNADA 2-1-1 REPETE
-% Caso 07 - Fs = 1500 3 MARCAS PARADAS
+% Caso 03 - Fs = 900 MARCA ANDANDO LENTAMENTE NO SENTIDO HORÁRIO - MAIS RAPIDO QUE O ANTERIOR ESSE
+% Caso 04 - Fs = 1000 MARCA PARADA NO MESMO LOCAL ESSE
+% Caso 05 - Fs = 1100 MARCA ANDANDO LENTAMENTE NO SENTIDO ANTI-HORÁRIO ESSE
+% Caso 06 - Fs = 1300 MARCA ALTERNADA 2-1-1 REPETE ESSE
+% Caso 07 - Fs = 1500 3 MARCAS PARADAS ESSE
 % Caso 08 - Fs = 1700 2 MARCAS ANDANDO EM SENTIDO HORÁRIO
-% Caso 09 - Fs = 1900 2 MARCAS ANDANDO EM SENTIDO HORÁRIO - VELOCIDADE MENOR QUE 1700
-% Caso 10 - Fs = 2000 2 MARCAS PARADAS
-% Caso 11 - Fs = 2100 2 MARCAS ANDANDO EM SENTIDO HORÁRIO
+% Caso 09 - Fs = 1900 2 MARCAS ANDANDO EM SENTIDO HORÁRIO - VELOCIDADE MENOR QUE 1700 ESSE
+% Caso 10 - Fs = 2000 2 MARCAS PARADAS ESSE
+% Caso 11 - Fs = 2100 2 MARCAS ANDANDO EM SENTIDO HORÁRIO ESSE
 % Caso 12 - Fs = 2300 1 MARCA ANDANDO EM SENTIDO HORÁRIO
-% Caso 13 - Fs = 2500 1 MARCA ANDANDO EM SENTIDO HORÁRIO MAIS RÁPIDO QUE 2300
-% Caso 14 - Fs = 3000 1 MARCA APARECENDO n VEZES A FREQENCIA SEMPRE NOS MESMO PONTOS, NESSE CASO n=3
+% Caso 13 - Fs = 2500 1 MARCA ANDANDO EM SENTIDO HORÁRIO MAIS RÁPIDO QUE 2300 ESSE
+% Caso 14 - Fs = 3000 1 MARCA APARECENDO n VEZES A FREQENCIA SEMPRE NOS MESMO PONTOS, NESSE CASO n=3 ESSE
 % Caso 15 - Fs = 4000 1 MARCA APARECENDO n VEZES A FREQENCIA SEMPRE NOS  MESMO PONTOS, NESSE CASO n=4
 % Caso 16 - Fs = 5000 1 MARCA APARECENDO n VEZES A FREQENCIA SEMPRE NOS MESMO PONTOS, NESSE CASO n=5 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 close all; clear all; clc; %pkg load signal;
+freq_tp = 500;
 % Geração de um sinal contínuo no tempo e limitado em frequência;
 % Definições no tempo para geração e amostragem do sinal de entrada:
 amp      = 1;                 % Amplitude do Sinal;
@@ -55,7 +57,7 @@ title (" Sinal de Entrada no Dom\'{i}nio do Tempo", 'Interpreter', 'LaTex','Font
 % GERAÇÃO DO TREM DE PULSOS
 amp  = 1;
 duty = 15; %Lembrar de explicar o que acontece com a sync. 
-freq_tp = 2900;
+% freq_tp = 2900;
 pwm_signal = pulses_generator(t,freq_tp,amp,duty);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO TREM DE PULSOS
@@ -82,15 +84,15 @@ xs = xt.*pwm_signal;
 % PLOT DA MODULAÇÃO E DA INTERSSEÇÃO DOS SINAIS ORIGINAIS E MODULADOS
 % PLOT DA MODULAÇÃO
 p2 = figure;
-subplot(3,1,1)
-plot(t,xs, 'LineWidth',2);
-grid on;
-xlabel ('Tempo (s)' , 'Interpreter','LaTex','FontSize',12);
-ylabel ("Amplitude", 'Interpreter','LaTex','FontSize',12);
-title (" Sinal Modulado com PAM", 'Interpreter','LaTex','FontSize',12);
+% subplot(3,1,1)
+% plot(t,xs, 'LineWidth',2);
+% grid on;
+% xlabel ('Tempo (s)' , 'Interpreter','LaTex','FontSize',12);
+% ylabel ("Amplitude", 'Interpreter','LaTex','FontSize',12);
+% title (" Sinal Modulado com PAM", 'Interpreter','LaTex','FontSize',12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DA SOBREPOSIÇÃO DO SINAL ORIGINAL E MODULADO
-subplot(3,1,2)
+subplot(2,1,1)
 plot(t,xt, '-.', 'LineWidth',1);
 hold on
 plot(t,xs, '-', 'LineWidth',1);
@@ -101,7 +103,7 @@ title (" Sobreposi\c{c}\~{a}o entre o sinal original e modulado", 'Interpreter',
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT DO VENTILADOR
 [x_v, y_v] = ventilador (freq, freq_tp, stoptime);
-subplot(3,1,3)
+subplot(2,1,2)
 % figure;
 plot(t,xt, '-.', 'LineWidth',1);
 hold on
@@ -115,35 +117,55 @@ exportgraphics(p2,freq_tp_str);
 freq_tp_str = join(['PRINTS\\', int2str(freq_tp), '_F2.eps']);
 exportgraphics(p2,freq_tp_str);
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PLOT DO ESPECTRO DA ENTRADA, TREM DE PULSOS E SOBREPOSIÇÃO DE ESPECTROS
-% PLOT ENTRADA
-p3 = figure;
-subplot(2,4,[1,2])
+p4 = figure;
+subplot(2,1,1)
 plot(f_Xt,Xt);
 axis([-3000 3000 0 max(Xt)*1.1]);
 grid on;
 xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
 ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
 title (" Espectro do Sinal da Entrada", 'Interpreter','LaTex','FontSize',12);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PLOT PWM
-subplot(2,4,[5,6])
+subplot(2,1,2)
 plot(f_PWM,PWM);
-axis([-3000 3000 0 max(PWM)*1.1]);
+axis([-10000 10000 0 max(PWM)*1.1]);
 grid on;
 xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
 ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
 title (" Espectro do  Trem de Pulsos", 'Interpreter','LaTex','FontSize',12);
+freq_tp_str = join(['PRINTS\\sinc.pdf']);
+exportgraphics(p4,freq_tp_str);
+freq_tp_str = join(['PRINTS\\sinc.eps']);
+exportgraphics(p4,freq_tp_str);
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PLOT DO ESPECTRO DA ENTRADA, TREM DE PULSOS E SOBREPOSIÇÃO DE ESPECTROS
+% PLOT ENTRADA
+p3 = figure;
+% subplot(2,4,[1,2])
+% plot(f_Xt,Xt);
+% axis([-3000 3000 0 max(Xt)*1.1]);
+% grid on;
+% xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+% ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
+% title (" Espectro do Sinal da Entrada", 'Interpreter','LaTex','FontSize',12);
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % PLOT PWM
+% subplot(2,4,[5,6])
+% plot(f_PWM,PWM);
+% axis([-3000 3000 0 max(PWM)*1.1]);
+% grid on;
+% xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
+% ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12);
+% title (" Espectro do  Trem de Pulsos", 'Interpreter','LaTex','FontSize',12);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLOT SOBREPOSIÇÃO DE ESPECTROS
-l = subplot(2,4,[3,4,7,8]);
+% l = subplot(2,4,[3,4,7,8]);
 stem(f_Xt,Xt,'.');
 hold on
 plot(f_Xs,Xs);
-axis([-3000 3000 0 max(Xs)*1.1]);
+axis([-4500 4500 0 max(Xs)*1.1]);
 xlabel ("\it f (Hertz)" , 'Interpreter','LaTex','FontSize',12);
-colororder(l,{'k'})
-yyaxis right
+% colororder(p3,{'k'})
+% yyaxis right
 ylabel ('$\arrowvert$X(\it f)$\arrowvert$', 'Interpreter','LaTex','FontSize',12, 'Color', 'black');
 title (" Sobreposi\c{c}\~{a}o de espectros", 'Interpreter','LaTex','FontSize',12);
 legend ('Entrada', 'Saida');
